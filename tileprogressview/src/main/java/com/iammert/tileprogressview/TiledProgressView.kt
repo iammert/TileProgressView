@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.FloatRange
 import androidx.core.animation.addListener
 import androidx.core.content.ContextCompat
@@ -94,7 +95,7 @@ class TiledProgressView @JvmOverloads constructor(
         )
     }
 
-    fun setProgress(@FloatRange(from = 0.0, to = 1.0) progressValue: Float) {
+    fun setProgress(@FloatRange(from = 0.0, to = 100.0) progressValue: Float) {
         progressAnimator.setFloatValues(currentProgressValue, progressValue)
         progressAnimator.start()
         currentProgressValue = progressValue
@@ -102,6 +103,21 @@ class TiledProgressView @JvmOverloads constructor(
 
     fun setLoadingColor(@ColorInt progressColor: Int) {
         foregroundProgressPaint.color = progressColor
+        invalidate()
+    }
+
+    fun setLoadingColorRes(@ColorRes progressColorRes: Int) {
+        foregroundProgressPaint.color = ContextCompat.getColor(context, progressColorRes)
+        invalidate()
+    }
+
+    fun setColor(@ColorInt color: Int) {
+        backgroundProgressPaint.color = color
+        invalidate()
+    }
+
+    fun setColorRes(@ColorRes colorRes: Int) {
+        backgroundProgressPaint.color = ContextCompat.getColor(context, colorRes)
         invalidate()
     }
 
@@ -179,7 +195,7 @@ class TiledProgressView @JvmOverloads constructor(
             val min = foregroundProgressRectMin.width()
             val max = foregroundProgressRectMax.width()
             val maxProgress = max - min
-            val currentProgress = maxProgress * animatedValue
+            val currentProgress = maxProgress * animatedValue / 100f
             foregroundProgressRectCurrent.right =
                 foregroundProgressRectCurrent.left +
                         (foregroundProgressRadius * 2f) +
