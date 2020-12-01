@@ -1,0 +1,3 @@
+include ':tileprogressview'
+include ':app'
+rootProject.name = "TileProgressViewSample"
