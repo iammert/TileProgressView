@@ -19,8 +19,9 @@ Simple Progress View with Tile Animation
 # Modify
 
 ```kotlin
-tiledProgressView.setProgress(0.3f) //Between 0.0f - 1.0f
-tiledProgressView.setLoadingColor(R.color.purple) //Color Resource
+tiledProgressView.setProgress(30f) //Percentage
+tiledProgressView.setColorRes(R.color.white) 
+tiledProgressView.setLoadingColorRes(R.color.purple) 
 ```
 
 
